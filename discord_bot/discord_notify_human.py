@@ -21,7 +21,7 @@ def send_msg_to_discord_request(msg, channel_id, auth):
         'Authorization': auth,
     }
 
-    r = requests.post(url, data=payload, headers=header)
+    r = requests.post(url, data=payload, headers=header, timeout=60)
 
     print(r)
 
