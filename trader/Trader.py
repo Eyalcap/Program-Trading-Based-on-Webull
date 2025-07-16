@@ -1,6 +1,6 @@
-import requests
 from webull import webull
 from utils.dataIO import *
+from security import safe_requests
 
 
 class Trader:
@@ -303,7 +303,7 @@ class Trader:
         # rewrite the get_history_orders function in the webull library
         headers = self._webull.build_req_headers(include_trade_token=True, include_time=True)
         base_ustradebroker_url = 'https://ustrade.webullbroker.com/api'
-        response = requests.get(f'{base_ustradebroker_url}/trade/v2/option/list?secAccountId={self._webull._account_id}'
+        response = safe_requests.get(f'{base_ustradebroker_url}/trade/v2/option/list?secAccountId={self._webull._account_id}'
                                 f'&dateType=ORDER&pageSize={count}&status=' + str(status), headers=headers,
                                 timeout=self._webull.timeout)
         return response.json()
